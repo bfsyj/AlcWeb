@@ -1,0 +1,33 @@
+﻿@using alcEntity;
+@model List<EngineeringCase>
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/gcaltop.jpg) no-repeat center top;"></div>
+
+<div class="aboutconsult">
+    <p class="title">工程案例</p>
+    <p class="sub">Engineering case</p>
+</div>
+
+<div class="index-case">
+    <ul>
+        @{
+            foreach (var item in Model)
+            {
+                <li class="mr15">
+                    <img src="@item.imageUrl">
+                    <span class="one trans">@item.title</span>
+                    <span class="two trans"><a href="/EngineeringCase/Detail?id=@item.id"><p>@item.title</p></a></span>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+
+<script>
+
+    $(document).ready(function (e) {
+        $("#nav_EngineeringCase").addClass("layui-this").siblings().removeClass('layui-this')
+    })
+
+</script>

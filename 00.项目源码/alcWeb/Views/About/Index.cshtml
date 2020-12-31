@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "关于我们";
+}
+
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/abouttop.jpg) no-repeat center top;"></div>
+
+<div class="aboutconsult">
+    <p class="title">关于我们</p>
+    <p class="sub">About us</p>
+    <p class="con">
+        南京艾力辰环保科技有限公司成立于2016年5月，位于南京市鼓楼区建宁路龙湖紫都城1栋1305室，是一家专业从事环境技术服务的高新技术企业。
+        团队经过3年的协作拼搏，市场不断扩大，业务广泛。公司拥有专业的技术团队、健全的管理制度、完善的质量保证体系，坚持“对业主负责，对群众负责，更对环境负责”的职业操守，为客户事业发展保驾护航。公司成立以来，已完成建设项目环境影响评价500余项，建设项目竣工环境保护自主验收以来已成功组织专家验收300余家，已完成编制突发环境事件应急预案60余项，指导80余家企业规范环保管理制度和危废管理。
+    </p>
+
+    <div class="layui-carousel" id="test10">
+        <div carousel-item="">
+            <div><img src="~/image/aboutturn1.jpg"></div>
+            <div><img src="~/image/aboutturn2.jpg"></div>
+            <!--            <div><img src="image/aboutturn3.jpg"></div>-->
+        </div>
+    </div>
+</div>
+
+<div class="about_yj" id="one">
+    <p>
+        <a>我们的愿景</a><br>
+        Our Vision<br>
+        <br>
+        以顾客为重心，科学严谨，求真务实，提供优质服务，成为最受客户信任和欢迎的全方位服务型环保管家，构建企业-咨询机构-管理部门互联式环保咨询平台。“提升企业环保理念，促进企业环保转型，助力政府环保改革”是我们永恒的使命。<br>
+    </p>
+    <img style="width: 450px;height: 300px" src="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/aboutus.jpg">
+</div>
+
+<div class="about_yj" id="one">
+    <p>
+        <a>公司寄语</a><br>
+        Corporate Message<br>
+        <a>--</a><br>
+    </p>
+</div>
+
+<div class="abouttp">
+    <p>
+        目前，公司下设人事部、市场部、环评部、验收部、应急预案服务中心、危险废物规范化管理指导中心及综合部等，主要经营范围包括：建设项目环境影响评价、建设项目竣工环境保护验收、突发环境事件应急预案、环境监理、清洁生产审核、排污许可申报、环保工程治理、危险废物规范化管理、企业环保培训、环保问题诊断等。公司人力资源呈梯度框架结构，通过以老带新、互相帮扶、培训学习等多种的形式，给员工提供了一个不断充实自我、提高能力的环境，使团队更加凝聚，业务能力和技术水平更加精湛。
+        我们志在打造一支“有事业心、有学习力、充满激情、追求卓越”的精英团队，期待同样优秀的您加入。
+        “一伙人，一件事，一个传奇，一生回忆”。也许你我并不完美，但我们在一起就能成就一份事业，成为行业传奇。
+        公司主要业务包括三大类：环境咨询业务；环保工程业务；环境调查业务。
+        多年来在全体同仁的共同努力下，公司取得了一定的成绩，树立了良好的公众形象和口碑。形成了自己的企业文化和优势，我们的宗旨是：用心服务，做环保行业的优秀服务生。
+        以顾客为重心，科学严谨，求真务实，提供优质服务，成为最受客户信任和欢迎的全方位服务型环保管家，构建企业-咨询机构-管理部门互联式环保咨询平台。“提升企业环保理念，促进企业环保转型，助力政府环保改革”是我们永恒的使命。<br>
+    </p>
+</div>
+
+<script>
+    $(document).ready(function (e) {
+        $("#nav_About").addClass("layui-this").siblings().removeClass('layui-this')
+    })
+    layui.use(['carousel', 'form'], function () {
+        var carousel = layui.carousel
+            , form = layui.form;
+
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            , width: '100%'
+            , height: '400px'
+            , interval: 1000
+            , full: false
+            , indicator: 'none'
+        });
+
+        //事件
+        carousel.on('change(test4)', function (res) {
+            console.log(res)
+        });
+
+        var $ = layui.$, active = {
+            set: function (othis) {
+                var THIS = 'layui-bg-normal'
+                    , key = othis.data('key')
+                    , options = {};
+
+                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                options[key] = othis.data('value');
+                ins3.reload(options);
+            }
+        };
+
+        //监听开关
+        form.on('switch(autoplay)', function () {
+            ins3.reload({
+                autoplay: this.checked
+            });
+        });
+
+        $('.demoSet').on('keyup', function () {
+            var value = this.value
+                , options = {};
+            if (!/^\d+$/.test(value)) return;
+
+            options[this.name] = value;
+            ins3.reload(options);
+        });
+
+        //其它示例
+        $('.demoTest .layui-btn').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>

@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="layui-carousel" id="test10">
+    <div carousel-item="">
+        <div><img style="width:100%; height: 350px;" src="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/shouyeturn1.jpg"></div>
+        <div><img style="width:100%; height: 350px;" src="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/shouyeturn2.jpg"></div>
+    </div>
+</div>
+<div class="consult">
+    <p class="title">您是否需要以下服务</p>
+    <p class="sub">Do you need the following services?</p>
+</div>
+
+<div class="contact">
+    <ul>
+        <li>
+            <img src="~/image/hjdc.jpg">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="one" href="#">环境咨询</a>
+        </li>
+        <li>
+            <img src="~/image/hjgc.jpg">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="one" href="#">环保工程</a>
+        </li>
+        <li>
+            <img src="~/image/hjzc.jpg">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="one" href="#">环境调查</a>
+        </li>
+    </ul>
+</div>
+
+<div class="about_1" id="one">
+    <p>
+        南京艾力辰环保科技有限公司下设有人事部、市场部、环评部、验收部、应急预案服务中心、危险废物规范化管理指导中心及综合部等。<br>
+        <br>
+        公司具备雄厚的技术实力和各方面的资源优势，主要从事建设项目环境影响评价、建设项目竣工环境保护验收、突发环境事件应急预案、环境监理、清洁生产审核、排污许可申报、环保工程治理、危险废物规范化管理、企业环保培训、环保问题诊断等。
+        <br>
+    </p>
+    <img style="width: 440px;height:350px" src="~/image/shouye-we.jpg">
+</div>
+
+<div class="consult">
+    <p class="title">我们的优势</p>
+    <p class="sub">Our advantage</p>
+    <p class="con">
+        多年来在全体同仁的共同努力下，公司取得了一定的成绩，树立了良好的公众形象和口碑。<br>
+        形成了自己的企业文化和优势，我们的宗旨是：用心服务，做环保行业的优秀服务生。
+    </p>
+</div>
+
+<div class="about_our" id="one">
+    <p>
+        <a>01.</a><br>
+        <br>
+        随着团队的不断拼搏，市场不断扩大，业务越来越广泛，公司已完成建设项目环境影响评价500余项，建设项目竣工环境保护自主验收以来已成功组织专家验收300余家，已完成编制突发环境事件应急预案60余项，指导80余家企业规范环保管理制度和危废管理。</br>
+    </p>
+    <img style="width: 519px;height: 300px" src="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/our_1.jpg">
+</div>
+
+<div class="about_our1" id="one">
+    <p>
+        <a>02.</a><br>
+        <br>
+        公司人力资源呈梯度框架结构，通过以老带新、互相帮扶、培训学习等多种的形式，给员工提供了一个不断充实自我、提高能力的环境，使团队更加凝聚，业务能力和技术水平更加精湛。</br>
+    </p>
+    <img style="width: 519px;height: 300px" src="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/our_2.jpg">
+</div>
+
+<div class="about_our" id="one">
+    <p>
+        <a>03.</a><br>
+        <br>
+        本着“以顾客为重心，科学严谨，求真务实”的态度，艾力辰离成为最受客户信任和欢迎的全方位服务型环保管家，构建企业-咨询机构-管理部门互联式环保咨询平台的目标越来越近。</br>
+    </p>
+    <img style="width: 519px;height: 300px" src="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/our_3.jpg">
+</div>
+
+
+<script>
+
+    $(document).ready(function (e) {
+        $("#nav_Home").addClass("layui-this").siblings().removeClass('layui-this')
+    })
+
+    layui.use(['carousel', 'form'], function () {
+        var carousel = layui.carousel
+            , form = layui.form;
+
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            , width: '100%'
+            , height: '350px'
+            , interval: 5000
+            , full: false
+        });
+
+        //事件
+        carousel.on('change(test4)', function (res) {
+            console.log(res)
+        });
+
+        var $ = layui.$, active = {
+            set: function (othis) {
+                var THIS = 'layui-bg-normal'
+                    , key = othis.data('key')
+                    , options = {};
+
+                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                options[key] = othis.data('value');
+                ins3.reload(options);
+            }
+        };
+
+        //监听开关
+        form.on('switch(autoplay)', function () {
+            ins3.reload({
+                autoplay: this.checked
+            });
+        });
+
+        $('.demoSet').on('keyup', function () {
+            var value = this.value
+                , options = {};
+            if (!/^\d+$/.test(value)) return;
+
+            options[this.name] = value;
+            ins3.reload(options);
+        });
+
+        //其它示例
+        $('.demoTest .layui-btn').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>

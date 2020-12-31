@@ -1,0 +1,121 @@
+﻿@using alcEntity;
+@model List<Introduction>
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/hjzxtop.jpg) no-repeat center top;"></div>
+
+<div class="consult">
+    <p class="title" id="hjzx"><a href="hjzc.html">环境咨询</a></p>
+    <p class="con">
+        公司立足江苏和安徽为主导的环保科技技术服务市场，已为上千家建设单位提供了</br>
+        环保技术咨询服务，服务并得到了当地环保行政管理部门和项目建设方的一致好评。
+    </p>
+    <div class="cons" style="height:auto">
+        <ul>
+
+            @{
+                foreach (var item in Model)
+                {
+                        <li class="@item.id">
+                            <a class="one topLink" href="#@item.id">- @item.orderNumber.ToString("D2") -</a>
+                            @if (item.title.Length > 7)
+                            {
+                                <a class="two topLink" href="#@item.id">@item.title.Substring(0, 7)<br>@item.title.Substring(7, item.title.Length-7)</a>
+                            }
+                            else
+                            {
+                                <a class="two topLink" href="#@item.id">@item.title</a>
+                            }
+
+                        </li>
+                }
+            }
+
+        </ul>
+
+    </div>
+
+    <div class="hgs">
+
+
+        @{
+            foreach (var item in Model)
+            {
+                var contents = item.content.Split('，');
+                <h1 title="@item.title" id="@item.id">@item.title </h1>
+                
+                <ul>
+                    @for (int i = 1; i <= contents.Length; i++)
+                    {
+                        <li class="mr9">
+                            <a class="one">@i</a>
+                            <p>@contents[i-1]<a class="two"></a></p>
+                        </li>
+                    }
+
+
+
+                </ul>
+            }
+        }
+
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function (e) {
+        $("#nav_Introduction").addClass("layui-this").siblings().removeClass('layui-this')
+    })
+    layui.use(['carousel', 'form'], function () {
+        var carousel = layui.carousel
+            , form = layui.form;
+
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            , width: '100%'
+            , height: '500px'
+            , interval: 5000
+            , full: false
+        });
+
+        //事件
+        carousel.on('change(test4)', function (res) {
+            console.log(res)
+        });
+
+        var $ = layui.$, active = {
+            set: function (othis) {
+                var THIS = 'layui-bg-normal'
+                    , key = othis.data('key')
+                    , options = {};
+
+                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                options[key] = othis.data('value');
+                ins3.reload(options);
+            }
+        };
+
+        //监听开关
+        form.on('switch(autoplay)', function () {
+            ins3.reload({
+                autoplay: this.checked
+            });
+        });
+
+        $('.demoSet').on('keyup', function () {
+            var value = this.value
+                , options = {};
+            if (!/^\d+$/.test(value)) return;
+
+            options[this.name] = value;
+            ins3.reload(options);
+        });
+
+        //其它示例
+        $('.demoTest .layui-btn').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>

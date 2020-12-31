@@ -1,0 +1,56 @@
+﻿@using alcEntity;
+@model List<EnvironmentNews>
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/abouttop.jpg) no-repeat center top;"></div>
+
+<div class="N-nav">
+    <span><a asp-controller="EnvironmentFiles" asp-action="List">环保公示</a></span>
+
+    <span class="on"><a asp-controller="EnvironmentNews" asp-action="List">环境新闻</a></span>
+
+    <span><a asp-controller="AlcNews" asp-action="List">艾力<br>辰动态</a></span>
+
+    <div style="clear: both;"></div>
+</div>
+
+<div class="aboutconsult">
+    <p class="title">环境新闻</p>
+</div>
+
+<div class="news">
+
+    @{
+        var index = 0;
+        foreach (var item in Model)
+        {
+            index++;
+            <div class="item_news">
+                <img src="@item.imageUrl">
+                <div class="nr">
+                    <p class="tit"><a href="/EnvironmentNews/Detail?id=@item.id">@item.title</a></p>
+                    <p class="key">@item.remark   浏览量：@item.lookNumber</p>
+                    <p class="sub">
+                        @item.content
+                    </p>
+                    <p class="more"><a href="/EnvironmentNews/Detail?id=@item.id">查看更多 +</a></p>
+                </div>
+                <div class="date">
+                    <a class="one">@index</a>
+                    <a class="two">@item.date.ToString("yyyy-MM-dd")</a>
+                </div>
+            </div>
+
+        }
+    }
+
+
+</div>
+
+
+
+<script>
+    $(document).ready(function (e) {
+        $("#nav_AlcNews").addClass("layui-this").siblings().removeClass('layui-this')
+    })
+</script>
+

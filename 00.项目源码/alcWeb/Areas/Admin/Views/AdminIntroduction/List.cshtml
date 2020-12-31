@@ -1,0 +1,164 @@
+﻿@{
+    Layout = null;
+}
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<link href="~/css/public.css" rel="stylesheet" />
+<link href="~/css/admin.css" rel="stylesheet" />
+
+<script src="~/layui/layui.js"></script>
+
+
+<div class="layadmin-tabsbody-item layui-show">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="keyWord" name="keyWord" class="layui-input searchVal" />
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <button class="layui-btn layuiadmin-btn-admin search_btn btn_search" lay-submit="" lay-filter="LAY-user-back-search">
+                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i> 搜索
+                        </button>
+                    </div>
+                    <div class="layui-inline layui-right">
+
+                        <a class="layui-btn  addNews_btn btn_addnew" style="float:right">新增</a>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-fluid layadmin-homepage-fluid">
+                <div class="layui-row layui-col-space8">
+                    <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="tableListBar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="imageShow">
+    <img src="{{d.imageUrl}}" style="height:28px" />
+</script>
+
+<script>
+    layui.use(['table', 'layer', 'util'], function () {
+        $ = layui.jquery;
+        var layer = parent.layer === undefined ? layui.layer : top.layer;
+        var table = layui.table;
+        var util = layui.util;
+        table.render({
+
+            elem: '#tableList'
+            , url: '/Admin/AdminIntroduction/GetListByPage'
+            , page: true
+            ,limits: [10, 15, 20, 25]
+            ,limit: 10
+            , cols: [[
+                { title: '序号', type: 'numbers', fixed: 'left'}
+                , { field: 'title', width: 220, title: '名称'}
+                , { field: 'content', minWidth: 300, title: '内容' }
+                , { field: 'orderNumber', width: 80, title: '排序' }
+                , {
+                    field: 'isShow', width: 80, title: '状态', align: "center", templet: function (d) {
+                        if (d.isShow == 0) {
+                            return "隐藏";
+                        } else if (d.isShow == 1) {
+                            return "显示";
+                        }
+                        return "";
+                    }
+                }
+                , { title: '操作', width: 120, templet: '#tableListBar', fixed: "right", align: "center" }
+            ]]
+            ,request: {
+                pageName: 'pageIndex', //页码的参数名称，默认：page
+                limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            }
+        });
+        //搜索
+        $(".search_btn").on("click", function () {
+            reloadData();
+        });
+        //新增
+        $(".addNews_btn").click(function () {
+            edit('新增', '');
+        })
+
+        //列表操作
+        table.on('tool(tableList)', function (obj) {
+            var layEvent = obj.event,
+                data = obj.data;
+            if (layEvent === 'edit') { //编辑
+                edit("编辑", data.id);
+            } else if (layEvent === 'del') { //删除
+                layer.confirm('确定删除此记录？', { icon: 3, title: '提示信息' }, function (index) {
+                    $.get("/Admin/AdminIntroduction/Delete", {
+                        id: data.id
+                    }, function (res) {
+                        if (res == 'success') {
+                            reloadData();
+                            layer.close(index);
+                        }
+                        else if (res != undefined && res != '') {
+                            layer.msg(res);
+                        } else {
+                            layer.msg("操作失败！");
+                        }
+                    })
+                });
+            }
+        })
+
+        // 编辑弹窗
+        function edit(title, id) {
+            var index = layui.layer.open({
+                title: title,
+                type: 2,
+                area: ["550px", "580px"],
+                content: '/Admin/AdminIntroduction/Edit?id=' + id,
+                success: function (layero, index) {
+                    var body = layui.layer.getChildFrame('body', index);
+                    setTimeout(function () {
+                        layui.layer.tips('点击此处返回列表', '.layui-layer-setwin .layui-layer-close', {
+                            tips: 3
+                        });
+                    }, 500)
+                }
+            })
+            layui.layer.full(index);
+            window.sessionStorage.setItem("index", index);
+            $(window).on("resize", function () {
+                layui.layer.full(window.sessionStorage.getItem("index"));
+            })
+        }
+
+
+    });
+
+    // 刷新列表
+    function reloadData() {
+        layui.use(['table', 'layer'], function () {
+            var table = layui.table;
+            $ = layui.jquery;
+            layer.closeAll("iframe");
+            table.reload("tableList", {
+                page: {
+                    curr: 1
+                },
+                where: {
+                    keyWord: encodeURI($("#keyWord").val())
+                }
+            })
+        });
+    }
+
+</script>

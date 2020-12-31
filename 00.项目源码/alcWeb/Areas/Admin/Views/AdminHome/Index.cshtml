@@ -1,0 +1,114 @@
+﻿<link href="~/layui/css/layui.css" rel="stylesheet" />
+<link href="~/css/index.css" rel="stylesheet" media="all" />
+
+<div class="layui-layout layui-layout-admin ">
+    <!-- 顶部 -->
+    <div class="layui-header header">
+        <div class="erp-header-unit erp-header-logo">
+            <div class="erp-nav-logo">
+                <a target="_blank" class="erp-logo-inner" href="" title="">
+                    <span class="erp-logo-icon">
+                        <img style="width:40px;height:32px" src="~/image/logoShow.png" />
+                    </span>
+                </a>
+            </div>
+        </div>
+        <ul class="layui-nav layui-layout-left" style="left:61px; padding: 0;">
+            <li class="layui-nav-item" id="userInfo">
+                <a href="javascript:;"><cite class="adminName" style="font-size: 18px; color:#fff;position:relative;z-index:10000;">艾力辰后台管理系统</cite></a>
+            </li>
+        </ul>
+        <!-- 图片 -->
+        <div class="layui-header layui-nav layui-layout-left" style="padding: 0 253px 0  220px;">
+            <img src="~/image/top_bg.png" />
+        </div>
+        <!-- 顶部右侧菜单 -->
+        <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right" style="z-index: 10000;">
+            <li class="layui-nav-item" id="userInfo">
+                @*<a href="javascript:;"><cite class="adminName" style="color:#fff;">管理员</cite></a>*@
+                @*<dl class="layui-nav-child">
+                    <dd><a href="javascript:;" onclick="PersonalInfo();"><i class="layui-icon">&#xe63c;</i><cite>个人资料</cite></a></dd>
+                    <dd><a href="javascript:;" onclick="ModifySysUserPwd();"><i class="layui-icon">&#xe6b2;</i><cite>修改密码</cite></a></dd>
+                    <dd><a asp-controller="Admin/AdminLogin" asp-action="Logout" method = "post" class="signOut"><i class="layui-icon">&#xe716;</i><cite>退出</cite></a></dd>
+                </dl>*@
+            </li>
+        </ul>
+    </div>
+    <!-- 左侧导航 -->
+    <div class="layui-side layui-side-menu hideMenu22" style="margin-top:50px;">
+        <div class="navBar layui-side-scroll" id="navBar">
+            <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+            </ul>
+        </div>
+        <div style="content: '';display: block; width: 100%;height: 44px;background-color: #17182b; position: absolute;bottom: 0; border-top: 1px solid #2a2c4a;">
+            <a href="javascript:;" class="layui-icon  layui-icon-spread-left hideMenu"></a>
+        </div>
+    </div>
+
+    <!-- 右侧内容 -->
+    <div class="layui-body layui-form layadmin-pagetabs" id="LAY_app_tabs" style="top:50px;">
+        <div class="layui-tab mag0" lay-filter="bodyTab" id="top_tabs_box" style="margin:0">
+            <ul class="layui-tab-title top_tab" id="top_tabs">
+                <li class="layui-this" lay-id=""><i class="layui-icon" data-icon="">&#xe629;</i> <cite>首页</cite></li>
+            </ul>
+            <ul class="layui-nav closeBox">
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon caozuo">&#xe643;</i> 页面操作</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="refresh refreshThis"><i class="layui-icon">&#xe669;</i> 刷新当前</a></dd>
+                        <dd><a href="javascript:;" class="closePageOther"><i class="layui-icon">&#xe60b;</i> 关闭其他</a></dd>
+                        <dd><a href="javascript:;" class="closePageAll"><i class="layui-icon">&#x1006;</i> 关闭全部</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <div class="layui-tab-content clildFrame">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="/Admin/AdminHome/Welcome"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/layui/layui.js"></script>
+<script src="~/js/index-iframe.js"></script>
+<script type="text/javascript">
+    layui.config({
+        base: '/layui/' //静态资源所在路径
+    }).use(['jquery', "layer"], function () {
+        var $ = layui.jquery;
+
+
+   
+    });
+
+
+    //修改密码
+    function ModifySysUserPwd() {
+
+        alert("该功能暂未启用！")
+
+        //var index = layer.open({
+        //    title: "修改密码",
+        //    type: 2,
+        //    area: ["600px", "280px"],
+        //    content: "/Sys_User/ModifySysUserPwd"
+        //})
+    }
+
+    //个人资料
+    function PersonalInfo() {
+
+        alert("该功能暂未启用！")
+
+        //var index = layer.open({
+        //    title: "个人资料",
+        //    type: 2,
+        //    area: ["850px", "650px"],
+        //    content: '/Sys_User/PersonalInfo'
+        //})
+    }
+
+
+
+
+</script>

@@ -1,0 +1,59 @@
+﻿@using alcEntity;
+@model List<EnvironmentFiles>
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/abouttop.jpg) no-repeat center top;"></div>
+
+<div class="N-nav">
+    <span class="on"><a asp-controller="EnvironmentFiles" asp-action="List">环保公示</a></span>
+
+    <span><a asp-controller="EnvironmentNews" asp-action="List">环境新闻</a></span>
+
+    <span><a asp-controller="AlcNews" asp-action="List">艾力<br>辰动态</a></span>
+
+    <div style="clear: both;"></div>
+</div>
+
+<div class="aboutconsult">
+    <p class="title">环保公示</p>
+</div>
+
+<div class="publicity">
+
+    @{
+        foreach (var item in Model)
+        {
+            <ul>
+                    <li>
+                        <p class="date">@item.date.ToString("yyyy-MM-dd")</p>
+                        <p class="tit"><a href="/EnvironmentFiles/Detail?id=@item.id">@item.title</a></p>
+                        @if (item.downUrl != null && item.downUrl != "")
+                        {
+                            <p class="down" onclick="clickDownUrl('@item.id')"><a href="@item.downUrl"  target="_blank">点击下载<span class="layui-badge layui-bg-green" style="margin-left: 10px">下载量:@item.downNumber</span></a></p>
+                        }
+                    </li>
+            </ul>
+        }
+    }
+
+</div>
+
+
+<script>
+    $(document).ready(function (e) {
+        $("#nav_AlcNews").addClass("layui-this").siblings().removeClass('layui-this')
+    })
+
+
+    function clickDownUrl(id) {
+        $.ajax({
+            type: "GET",
+            url: "/EnvironmentFiles/DownFile",
+            data: { id: id },
+            success: function () {
+               
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

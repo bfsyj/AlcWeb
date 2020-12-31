@@ -1,0 +1,149 @@
+﻿@using alcEntity;
+@model EnvironmentNews
+@{
+    ViewBag.Title = "艾力辰动态维护";
+    Layout = null;
+}
+
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<link href="~/css/public.css" rel="stylesheet" />
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/ueditor/ueditor.config.js"></script>
+<script src="~/ueditor/ueditor.all.min.js"></script>
+
+
+<form class="layui-form magt10" style="padding-right:50px;" lay-filter="DictTypeEdit">
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.lookNumber)
+    @Html.HiddenFor(model => model.editUser)
+    @Html.HiddenFor(model => model.editTime)
+    @Html.HiddenFor(model => model.content)
+
+    <div class="layui-row">
+        <div class="magb15 layui-col-md4 layui-col-xs12">
+            <label class="layui-form-label"><span style="color:orangered">*</span>标题：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" id="title" name="title" value="@Model.title" lay-verify="required">
+            </div>
+        </div>
+        <div class="magb15 layui-col-md4 layui-col-xs12">
+            <label class="layui-form-label">标记：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" id="remark" name="remark" value="@Model.remark">
+            </div>
+        </div>
+        <div class="magb15 layui-col-md4 layui-col-xs12">
+            <label class="layui-form-label"><span style="color:orangered">*</span>日期：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" id="date" name="date" readonly="readonly" autocomplete="off"
+                       value="@(Model.date.ToString() == "0001/1/1 0:00:00" ? "" : Model.date.ToString("yyyy-MM-dd"))" lay-verify="required">
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-row">
+        <div class="magb15 layui-col-md4 layui-col-xs12">
+            <label class="layui-form-label"><span style="color:orangered">*</span>图片路径：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" id="imageUrl" name="imageUrl" value="@Model.imageUrl" lay-verify="required">
+            </div>
+        </div>
+        <div class="magb15 layui-col-md4 layui-col-xs12">
+            <label class="layui-form-label">状态：</label>
+            <div class="layui-input-block">
+                @{
+                    if (Model.isShow == 1)
+                    {
+                        <input type="checkbox" id="isShow" name="isShow" checked="checked" title="显示">
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="isShow" name="isShow" title="显示">
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="magb15 layui-col-md12 layui-col-xs12">
+            <label class="layui-form-label"><span style="color:orangered">*</span>内容：</label>
+            <div class="layui-input-block">
+                <div id="myEditor" style="width:100%;height:300px;" />
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item layui-row layui-col-xs12">
+        <div class="layui-input-block layui-center" style=" margin-bottom: 30px">
+            <button class="layui-btn btn_keep" lay-submit lay-filter="save">保存</button>
+            <button type="button" class="layui-btn btn_cancel">取消</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/layui/layui.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var ue = UE.getEditor('myEditor');
+        var temp = document.getElementById("content").value;
+        ue.ready(function () {
+            ue.setContent(temp);
+        })
+    });
+
+    layui.config({
+        base: "/layui/lay/mymodules/"
+    }).use(['form', 'layer', 'laydate'], function () {
+        var form = layui.form
+            , layer = parent.layer === undefined ? layui.layer : top.layer
+            , laydate = layui.laydate;
+        laydate.render({
+            elem: '#date'
+        });
+
+
+        //监听提交
+        form.on("submit(save)", function (data) {
+
+            data.field.content = UE.getEditor('myEditor').getContent();
+            if (data.field.content == "" || data.field.content == null) {
+                alert("内容不能为空！");
+                return false;
+            }
+            if ($('#isShow').is(":checked")) {
+                data.field.isShow = 1;
+            }
+            else {
+                data.field.isShow = 0;
+            }
+            //弹出loading
+            var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
+            //// 提交信息
+            //data.field.DictNatureName = $("#DictTypeName").val();
+            //data.field.DictTypeCode = $("#DictTypeCode").val();
+
+            $.post("/Admin/AdminEnvironmentNews/Save", data.field, function (res) {
+                if (res == 'success') {
+                    parent.reloadData();
+                    layer.closeAll();
+                }
+                else if (res != undefined && res != '') {
+                    layer.msg(res);
+                } else {
+                    layer.msg("操作失败！");
+                }
+            });
+            return false;
+        })
+
+        $(".btn_cancel").on("click", function (e) {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        })
+
+        //form.render();
+    });
+</script>
+

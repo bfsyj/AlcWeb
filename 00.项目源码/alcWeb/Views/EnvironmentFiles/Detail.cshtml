@@ -1,0 +1,17 @@
+﻿@using alcEntity;
+@model EnvironmentFiles
+
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/abouttop.jpg) no-repeat center top;"></div>
+
+<div class="newsDe">
+    <p class="title">@Model.title</p>
+    <p class="date">时间：@Model.date.ToString("yyyy-MM-dd")&nbsp;&nbsp;&nbsp;&nbsp;@Model.remark&nbsp;&nbsp;&nbsp;&nbsp;浏览量：@Model.lookNumber</p>
+    <hr>
+    <div style="margin-top:20px">
+        @Html.Raw(Model.content)
+    </div>
+</div>
+
+
+

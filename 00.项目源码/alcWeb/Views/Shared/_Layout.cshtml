@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>南京艾力辰环保科技有限公司</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link href="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/logoalcw.jpg" rel="icon" type="image/x-ico">
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script src="~/layui/layui.all.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+</head>
+<body>
+    <header>
+        <ul class="layui-nav layui-bg-cyan">
+            <li class="layui-nav-item"><img src="~/image/logomin.jpg" /></li>
+            <li class="layui-nav-item"><a></a></li>
+            <li id="nav_Home" class="layui-nav-item "><a asp-controller="Home" asp-action="Index">首页</a></li>
+            <li class="layui-nav-item"><a></a></li>
+            <li id="nav_AlcNews" class="layui-nav-item"><a asp-controller="AlcNews" asp-action="List">新闻资讯</a></li>
+            <li class="layui-nav-item"><a></a></li>
+            <li id="nav_About" class="layui-nav-item "><a asp-controller="About" asp-action="Index">关于我们</a></li>
+            <li class="layui-nav-item"><a></a></li>
+            <li id="nav_Introduction" class="layui-nav-item"><a asp-controller="Introduction" asp-action="List">公司业务</a></li>
+            <li class="layui-nav-item"><a></a></li>
+            <li id="nav_EngineeringCase" class="layui-nav-item"><a asp-controller="EngineeringCase" asp-action="List">工程案例</a></li>
+            <li class="layui-nav-item"><a></a></li>
+            <li id="nav_Contact" class="layui-nav-item"><a asp-controller="Contact" asp-action="Index">联系我们</a></li>
+            <li class="layui-nav-item"><a></a></li>
+        </ul>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="foot">
+            <div class="inner">
+                <img class="logo" src="~/image/logo.png" />
+                <div class="txt">
+                    <p>地址：南京市鼓楼区建宁路龙湖紫都城1栋1305室</p>
+                    <p>联系电话：025-86658253     </p>
+                    <p>邮箱：nj_ailichen@163.com     </p>
+                    <p>©2020 南京艾力辰环保科技有限公司 . </p>
+                    <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow">备案号：苏ICP备19059994号</a> </p>
+                </div>
+                <div class="ewm">
+                    <img src="~/image/f-ewm.jpg" />
+                    <p>微信<br>服务号</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

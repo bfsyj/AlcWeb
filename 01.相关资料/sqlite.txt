@@ -1,0 +1,66 @@
+CREATE TABLE AlcNews(
+   id varchar(40) PRIMARY KEY     NOT NULL,
+   imageUrl           TEXT,
+   title            varchar(200),
+   remark        varchar(50),
+   date         DATETIME,
+	 content        TEXT,
+   lookNumber         INT,
+	 isShow        INT,
+   editTime         DATETIME,
+	 editUser        varchar(20)
+);
+
+CREATE TABLE EnvironmentNews(
+   id varchar(40) PRIMARY KEY     NOT NULL,
+   imageUrl           TEXT,
+   title            varchar(200),
+   remark        varchar(50),
+   date         DATETIME,
+	 content        TEXT,
+   lookNumber         INT,
+	 isShow        INT,
+   editTime         DATETIME,
+	 editUser        varchar(20)
+);
+
+
+CREATE TABLE EnvironmentFiles(
+   id varchar(40) PRIMARY KEY     NOT NULL,
+   downUrl           TEXT,
+   title            varchar(200),
+   remark        varchar(50),
+   date         DATETIME,
+	 content        TEXT,
+   lookNumber         INT,
+   downNumber         INT,
+	 isShow        INT,
+   editTime         DATETIME,
+	 editUser        varchar(20)
+);
+
+
+CREATE TABLE EngineeringCase(
+   id varchar(40) PRIMARY KEY     NOT NULL,
+   imageUrl           TEXT,
+   title            varchar(200),
+   remark        varchar(50),
+   date         DATETIME,
+	 content        TEXT,
+   lookNumber         INT,
+	 isShow        INT,
+   editTime         DATETIME,
+	 editUser        varchar(20)
+);
+
+CREATE TABLE Introduction(
+   id varchar(40) PRIMARY KEY     NOT NULL,
+   title            varchar(200),
+content        TEXT,
+   orderNumber         INT,
+isShow        INT,
+   editTime         DATETIME,
+	 editUser        varchar(20)
+);
+
+

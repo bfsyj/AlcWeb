@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>艾力辰|工程案例</title>
+    <link rel="stylesheet" type="text/css" href="layui/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="layui/layui/layui.js"></script>
+    <script src="layui/layui/layui.js" charset="utf-8"></script>
+    <link href="https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/logoalcw.jpg" rel="icon" type="image/x-ico">
+</head>
+<body>
+<ul class="layui-nav layui-bg-cyan">
+     <li class="layui-nav-item"><img src="image/logomin.jpg"></li>
+    <li class="layui-nav-item"><a></a></li>
+    <li class="layui-nav-item "><a href="index.html">首页</a></li>
+    <li class="layui-nav-item"><a></a></li>
+	<li class="layui-nav-item"><a href="hyzc/ztxw.html">新闻资讯</a></li>
+    <li class="layui-nav-item"><a></a></li>
+    <li class="layui-nav-item"><a href="about.html">关于我们</a></li>
+    <li class="layui-nav-item"><a></a></li>
+    <li class="layui-nav-item"><a href="gsyw.html">公司业务</a></li>
+    <li class="layui-nav-item"><a></a></li>
+    <li class="layui-nav-item layui-this"><a href="gcal.html">工程案例</a></li>
+    <li class="layui-nav-item"><a></a></li>
+    <li class="layui-nav-item"><a href="lxwm.html">联系我们</a></li>
+    <li class="layui-nav-item"><a></a></li>
+<!--    <li class="layui-nav-item"><a href="rczp.html">人才招聘</a></li>-->
+
+</ul>
+
+<div class="Nybanner" style="background:url(https://olc-wz.oss-cn-hangzhou.aliyuncs.com/upload/gcaltop.jpg) no-repeat center top;"></div>
+
+<div class="aboutconsult">
+    <p class="title">工程案例</p>
+    <p class="sub">Engineering case</p>
+</div>
+
+<div class="index-case">
+    <ul>
+        <li class="mr15">
+            <img src="upload/sqsshst.jpg">
+            <span class="one trans">重污染天气应急减排项目</span>
+            <span class="two trans"><a href="gcal/gcal_1.html"><p>宿迁市泗洪县重污染天。。。</p></a></span>
+        </li>
+
+        <li class="mr15">
+            <img src="upload/masmzy.jpg">
+            <span class="one trans">污水处理项目</span>
+            <span class="two trans"><a href="gcal/gcal_2.html"><p>马鞍山某制药污水处理。。。</p></a></span>
+        </li>
+
+        <li>
+            <img src="upload/xcsxzqtsg.jpg">
+            <span class="one trans">“碳酸钙行业整治提升”工作整改方案</span>
+            <span class="two trans"><a href="gcal/gcal_3.html"><p>“宣城市宣州区碳酸钙行。。。</p></a></span>
+        </li>
+
+        <li class="mr15">
+            <img src="upload/whmmm.jpg">
+            <span class="one trans">企业废气处理项目</span>
+            <span class="two trans"><a href="gcal/gcal_4.html"><p>芜湖某木门生产企业废气。。。</p></a></span>
+        </li>
+
+        <li class="mr15">
+            <img src="upload/xcmzsg.jpg">
+            <span class="one trans">粉尘废气处理项目</span>
+            <span class="two trans"><a href="gcal/gcal_5.html"><p>宣城某展示柜生产企业。。。</p></a></span>
+        </li>
+
+        <li>
+            <img src="upload/njmqc.jpg">
+            <span class="one trans">机加工废水项目</span>
+            <span class="two trans"><a href="gcal/gcal_6.html"><p>南京某汽车转向机生产。。。</p></a></span>
+        </li>
+
+    </ul>
+</div>
+<div class="foot">
+    <div class="inner">
+        <img class="logo" src="image/logo.png">
+        <div class="txt">
+            <p>地址：南京市建邺区中泰国际广场1栋2503（210019）</p>
+            <p>联系电话：025-86658253     </p>
+            <p>邮箱：nj_ailichen@163.com     </p>
+            <p>©2020 南京艾力辰环保科技有限公司 . </p>
+            <p><a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow">备案号：苏ICP备19059994号：</a> </p>
+        </div>
+        <div class="ewm">
+            <img src="image/f-ewm.jpg">
+            <p>微信<br>服务号</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script src="layui/layui/layui.js" charset="utf-8"></script>
+<script src="layui/layui/layui.all.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['carousel', 'form'], function(){
+        var carousel = layui.carousel
+            ,form = layui.form;
+
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            ,width: '100%'
+            ,height: '500px'
+            ,interval: 5000
+            ,full:false
+        });
+
+        //事件
+        carousel.on('change(test4)', function(res){
+            console.log(res)
+        });
+
+        var $ = layui.$, active = {
+            set: function(othis){
+                var THIS = 'layui-bg-normal'
+                    ,key = othis.data('key')
+                    ,options = {};
+
+                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                options[key] = othis.data('value');
+                ins3.reload(options);
+            }
+        };
+
+        //监听开关
+        form.on('switch(autoplay)', function(){
+            ins3.reload({
+                autoplay: this.checked
+            });
+        });
+
+        $('.demoSet').on('keyup', function(){
+            var value = this.value
+                ,options = {};
+            if(!/^\d+$/.test(value)) return;
+
+            options[this.name] = value;
+            ins3.reload(options);
+        });
+
+        //其它示例
+        $('.demoTest .layui-btn').on('click', function(){
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>
